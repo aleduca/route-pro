@@ -2,6 +2,7 @@
 
 namespace app\library;
 
+use app\library\RouteWildcard;
 use app\library\Uri;
 use Closure;
 
@@ -17,6 +18,7 @@ class Router
   ) {
     $route = new Route($request, $controller);
     $route->addRouteUri(new Uri($uri));
+    $route->addRouteWildcard(new RouteWildcard);
     $route->addRouteGroupOptions(new RouteOptions($this->routeOptions));
     $this->routes[] = $route;
   }

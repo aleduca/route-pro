@@ -9,6 +9,7 @@ class Route
 {
   private ?RouteOptions $routeOptions = null;
   private ?Uri $uri = null;
+  private ?RouteWildcard $routeWildcard = null;
 
   public function __construct(
     public string $request,
@@ -36,12 +37,28 @@ class Route
     return $this->uri;
   }
 
+  public function addRouteWildcard(RouteWildcard $routeWildcard)
+  {
+    $this->routeWildcard = $routeWildcard;
+  }
+
+  public function getRouteWildcardInstance(): ?RouteWildcard
+  {
+    return $this->routeWildcard;
+  }
+
+
   public function match()
   {
 
     if ($this->routeOptions->optionExist('prefix')) {
       $this->uri->setUri(rtrim("/{$this->routeOptions->execute('prefix')}{$this->uri->getUri()}", '/'));
     }
+
+    $this->routeWildcard->replaceWildcardWithPattern($this->uri->getUri());
+    $wildcardReplaced = $this->routeWildcard->getWildcardReplaced();
+
+    var_dump($wildcardReplaced);
 
     if (
       $this->uri->getUri() === $this->uri->currentUri() &&
