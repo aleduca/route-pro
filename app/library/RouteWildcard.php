@@ -8,6 +8,26 @@ class RouteWildcard
 {
 
   private string $wildcardReplaced;
+  private array $params = [];
+
+  public function paramsToArray(string $uri, string $wildcard, array $aliases)
+  {
+    $explodeUri = explode('/', ltrim($uri, '/'));
+    $explodeWildcard = explode('/', ltrim($wildcard, '/'));
+    $differenceArrays = array_diff($explodeUri, $explodeWildcard);
+
+    $aliasesIndex = 0;
+    foreach ($differenceArrays as $index => $param) {
+      if (!$aliases) {
+        $this->params[array_values($explodeUri)[$index - 1]] = is_numeric($param) ? (int)$param : $param;
+      } else {
+        $this->params[$aliases[$aliasesIndex]] = is_numeric($param) ? (int)$param : $param;
+        $aliasesIndex++;
+      }
+    }
+
+    var_dump($this->params);
+  }
 
   public function replaceWildcardWithPattern(string $uriToReplace)
   {
@@ -35,5 +55,10 @@ class RouteWildcard
   public function getWildcardReplaced(): string
   {
     return $this->wildcardReplaced;
+  }
+
+  public function getParams()
+  {
+    return $this->params;
   }
 }
