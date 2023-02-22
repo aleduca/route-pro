@@ -25,6 +25,13 @@ class RouteWildcard
     }
   }
 
+  public function uriEqualToPattern($currentUri, $wildcardReplaced)
+  {
+    $wildcard = str_replace('/', '\/', ltrim($wildcardReplaced, '\/'));
+
+    return preg_match("/^$wildcard$/", ltrim($currentUri, '/'));
+  }
+
   public function getWildcardReplaced(): string
   {
     return $this->wildcardReplaced;

@@ -58,7 +58,9 @@ class Route
     $this->routeWildcard->replaceWildcardWithPattern($this->uri->getUri());
     $wildcardReplaced = $this->routeWildcard->getWildcardReplaced();
 
-    var_dump($wildcardReplaced);
+    if ($wildcardReplaced !== $this->uri->getUri() && $this->routeWildcard->uriEqualToPattern($this->uri->currentUri(), $wildcardReplaced)) {
+      $this->uri->setUri($this->uri->currentUri());
+    }
 
     if (
       $this->uri->getUri() === $this->uri->currentUri() &&

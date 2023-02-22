@@ -40,6 +40,6 @@ class Router
       }
     }
 
-    return (new Controller)->call(new Route('/404', 'GET', 'NotFoundController:index'));
+    return (new Controller)->call(new Route('GET', 'NotFoundController:index'));
   }
 }

@@ -11,7 +11,7 @@ class Controller
   {
     return ($route->getRouteOptionsInstance() && $route->getRouteOptionsInstance()->optionExist('controller')) ?
       "app\\controllers\\" . $route->getRouteOptionsInstance()->execute('controller') . '\\' . $controller :
-      $controllerInstance = "app\\controllers\\" . $controller;
+      "app\\controllers\\" . $controller;
   }
 
 
@@ -20,7 +20,7 @@ class Controller
     $controller = $route->controller;
 
     if (!str_contains($controller, ':')) {
-      throw new Exception("Semi colon need to controller {$controller} in route");
+      throw new Exception("Colon need to controller {$controller} in route");
     }
 
     [$controller, $action] = explode(':', $controller);
