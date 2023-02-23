@@ -4,8 +4,8 @@ namespace app\controllers;
 
 class ProductController
 {
-  public function index()
+  public function index($productName)
   {
-    var_dump('index product');
+    var_dump($productName);
   }
 }

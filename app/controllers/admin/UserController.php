@@ -4,8 +4,8 @@ namespace App\Controllers\Admin;
 
 class UserController
 {
-  public function index()
+  public function index($userId, $userName)
   {
-    var_dump('user index admin');
+    var_dump($userName, $userId);
   }
 }

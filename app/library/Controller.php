@@ -36,6 +36,7 @@ class Controller
     if (!method_exists($controller, $action)) {
       throw new Exception("Action {$action} does not exist");
     }
-    call_user_func_array([$controller, $action], []);
+
+    call_user_func_array([$controller, $action], $route->getRouteWildcardInstance()->getParams());
   }
 }
