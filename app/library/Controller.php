@@ -37,10 +37,12 @@ class Controller
       throw new Exception("Action {$action} does not exist");
     }
 
-    if ($route->getRouteOptionsInstance()->optionExist('middlewares')) {
+    if ($route->getRouteOptionsInstance()?->optionExist('middlewares')) {
       (new Middleware($route->getRouteOptionsInstance()->execute('middlewares')))->execute();
     }
 
-    call_user_func_array([$controller, $action], $route->getRouteWildcardInstance()->getParams());
+    var_dump($route->getRouteOptionsInstance());
+
+    call_user_func_array([$controller, $action], $route->getRouteWildcardInstance()?->getParams() ?? []);
   }
 }

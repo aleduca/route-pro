@@ -2,7 +2,7 @@
 
 namespace app\middlewares;
 
-use App\Interfaces\MiddlewareInterface;
+use app\interfaces\MiddlewareInterface;
 
 class Teste implements MiddlewareInterface
 {
