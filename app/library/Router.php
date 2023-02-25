@@ -10,6 +10,7 @@ class Router
 {
   private array $routes = [];
   private array $routeOptions = [];
+  private Route $route;
 
   public function add(
     string $uri,
@@ -17,11 +18,22 @@ class Router
     string $controller,
     array $wildcardAliases = []
   ) {
-    $route = new Route($request, $controller, $wildcardAliases);
-    $route->addRouteUri(new Uri($uri));
-    $route->addRouteWildcard(new RouteWildcard);
-    $route->addRouteGroupOptions(new RouteOptions($this->routeOptions));
-    $this->routes[] = $route;
+    $this->route = new Route($request, $controller, $wildcardAliases);
+    $this->route->addRouteUri(new Uri($uri));
+    $this->route->addRouteWildcard(new RouteWildcard);
+    $this->route->addRouteGroupOptions(new RouteOptions($this->routeOptions));
+    $this->routes[] = $this->route;
+
+    return $this;
+  }
+
+  public function middleware(array $middlewares)
+  {
+    $options = (!empty($this->routeOptions)) ?
+      array_merge($this->routeOptions, ['middlewares' => $middlewares]) :
+      ['middlewares' => $middlewares];
+
+    $this->route->addRouteGroupOptions(new RouteOptions($options));
   }
 
   public function group(array $routeOptions, Closure $callback)

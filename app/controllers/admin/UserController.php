@@ -8,4 +8,8 @@ class UserController
   {
     var_dump($userName, $userId);
   }
+
+  public function show()
+  {
+  }
 }
