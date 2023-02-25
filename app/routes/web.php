@@ -8,7 +8,7 @@ try {
   });
 
   $router->add('/', 'GET', 'HomeController:index');
-  $router->add('/cart', 'GET', 'CartController:index')->middleware(['auth']);
+  $router->add('/cart', 'GET', 'CartController:index')->middleware(['auth', 'teste']);
   $router->add('/product/(:numeric)/name/(:alpha)', 'GET', 'ProductController:index');
   $router->add('/product/(:alpha)', 'GET', 'ProductController:index', ['productName']);
   $router->add('/cart/add', 'GET', 'CartController:add');

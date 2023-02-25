@@ -9,7 +9,8 @@ class UserController
     var_dump($userName, $userId);
   }
 
-  public function show()
+  public function show($userName)
   {
+    var_dump($userName);
   }
 }
