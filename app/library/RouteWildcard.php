@@ -38,7 +38,7 @@ class RouteWildcard
       $this->wildcardReplaced = str_replace('(:alpha)', EnumsRouteWildcard::alpha->value, $this->wildcardReplaced);
     }
 
-    if (str_contains($this->wildcardReplaced, '(:numeric)')) {
+    if (str_contains($this->wildcardReplaced, '(:any)')) {
       $this->wildcardReplaced = str_replace('(:any)', EnumsRouteWildcard::any->value, $this->wildcardReplaced);
     }
   }
